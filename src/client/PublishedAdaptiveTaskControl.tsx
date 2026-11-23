@@ -26,7 +26,8 @@ const words = {
 const buttonStyle: CSSProperties = { minHeight: 36, padding: '5px 10px', borderRadius: 8,
   border: '1px solid var(--dsw-alias-border-l2)', background: 'var(--dsw-alias-bg-layer-1)', color: 'inherit', cursor: 'pointer' }
 const entryButtonStyle: CSSProperties = { ...buttonStyle, display: 'inline-flex', alignItems: 'center', gap: 6,
-  border: 0, background: 'transparent', color: 'var(--dsw-alias-label-secondary)' }
+  border: 0, background: 'transparent', color: 'var(--dsw-alias-label-secondary)',
+  fontSize: 13, lineHeight: '20px', fontWeight: 400 }
 
 export function PublishedAdaptiveTaskControl(props: Props) {
   return <TaskRecoveryControl key={props.sessionId} {...props} />
