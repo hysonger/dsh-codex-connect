@@ -25,6 +25,8 @@ const words = {
 }
 const buttonStyle: CSSProperties = { minHeight: 36, padding: '5px 10px', borderRadius: 8,
   border: '1px solid var(--dsw-alias-border-l2)', background: 'var(--dsw-alias-bg-layer-1)', color: 'inherit', cursor: 'pointer' }
+const entryButtonStyle: CSSProperties = { ...buttonStyle, display: 'inline-flex', alignItems: 'center', gap: 6,
+  border: 0, background: 'transparent', color: 'var(--dsw-alias-label-secondary)' }
 
 export function PublishedAdaptiveTaskControl(props: Props) {
   return <TaskRecoveryControl key={props.sessionId} {...props} />
@@ -106,7 +108,15 @@ function TaskRecoveryControl({ sessionId, language = 'en' }: Props) {
   // Unknown state is never represented as confirmed off; retain only a recovery/read path.
   if (state?.mode === 'off' || (state === undefined && !failed && !opened)) return null
   return <>
-    <button ref={opener} type="button" style={buttonStyle} onClick={() => { setOpened(true); void request() }}>{text.button}</button>
+    <button ref={opener} type="button" style={entryButtonStyle} onClick={() => { setOpened(true); void request() }}>
+      <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false"
+        fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
+        <path d="M3 3v5h5" />
+        <path d="M12 7v5l3 2" />
+      </svg>
+      <span>{text.button}</span>
+    </button>
     {opened ? <dialog ref={dialog} aria-label={text.title} onCancel={event => { event.preventDefault(); close() }}
       style={{ maxWidth: 520, width: 'calc(100vw - 40px)', boxSizing: 'border-box', maxHeight: '90vh', overflow: 'auto',
         padding: 20, borderRadius: 12, border: '1px solid var(--dsw-alias-border-l2)',
